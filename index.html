@@ -10,13 +10,13 @@
 :root{color-scheme:light;--bg:#15100d;--cd:#261c16;--cr:#fff3dc;--rd:#e10600;--gd:#e0a82e;--or:#f28c28;--gr:#2fbf71;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box;margin:0}
-html,body{height:100%;height:100dvh}
-body{background:radial-gradient(circle at 85% 0,#431511,var(--bg) 55%);color:var(--cr);font-family:'Nunito Sans',system-ui,sans-serif;overflow:hidden;user-select:none;display:flex;flex-direction:column}
+html,body{height:100%;width:100%;overflow:hidden}
+body{position:fixed;inset:0;background:radial-gradient(circle at 85% 0,#431511,var(--bg) 55%);color:var(--cr);font-family:'Nunito Sans',system-ui,sans-serif;user-select:none;display:flex;flex-direction:column}
 #bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
 #bg span{position:absolute;bottom:-12%;opacity:.1;animation:up linear infinite}
-@keyframes up{to{transform:translateY(-120dvh) rotate(40deg)}}
+@keyframes up{to{transform:translateY(-120vh) rotate(40deg)}}
 #deck{flex:1;position:relative;min-height:0}
-.s{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:3dvh 5vw;text-align:center;overflow:hidden}
+.s{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:3dvh 5vw;text-align:center}
 .s.on{display:flex;animation:sl .5s}
 @keyframes sl{from{opacity:0;transform:translateX(40px)}}
 .k{color:var(--gd);letter-spacing:.2em;font-weight:800;font-size:clamp(12px,1.7vw,19px)}
@@ -62,20 +62,37 @@ body.nb #brand{display:none}
 .fa,.fb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;display:flex;align-items:center;justify-content:center;padding:6px;font-weight:800;font-size:clamp(11px,1.65vw,20px);line-height:1.2}
 .fa{background:var(--cd);border:2px solid #fff3}
 .fb{transform:rotateY(180deg);font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:clamp(30px,5vw,58px)}
-
 .rq{display:flex;align-items:center;gap:2vw;background:var(--cd);border-left:9px solid var(--c);border-radius:14px;padding:1.8dvh 2vw;width:min(940px,100%);margin:.9dvh 0;text-align:left}
 .rq .n{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(34px,6vw,70px);color:var(--c);background:none;line-height:1}
 .rq h3{font-size:clamp(16px,2.6vw,30px)}
 .rq p{font-size:clamp(12px,1.8vw,20px);opacity:.85;line-height:1.35}
 .tick{margin-left:auto;font-size:clamp(26px,4vw,46px);color:var(--gr);transform:scale(0)}
 .r.in .tick{transform:scale(1);transition:transform .5s .35s cubic-bezier(.2,2,.4,1)}
-#nav{height:56px;display:flex;align-items:center;justify-content:center;gap:18px;z-index:6}
-#nav button{width:42px;height:42px;border-radius:50%;border:2px solid var(--gd);background:none;color:var(--gd);font-size:18px;cursor:pointer}
-#dots{display:flex;gap:8px}#dots i{width:10px;height:10px;border-radius:50%;background:#fff3}#dots i.on{background:var(--rd);transform:scale(1.4)}
+
+/* Barra de navegación inferior mejorada */
+#nav{flex-shrink:0;min-height:56px;padding:10px 5px;display:flex;align-items:center;justify-content:center;gap:18px;z-index:6;flex-wrap:wrap}
+#nav button{width:42px;height:42px;border-radius:50%;border:2px solid var(--gd);background:none;color:var(--gd);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#nav #th{width:auto;border-radius:99px;padding:0 14px;font:800 13px 'Nunito Sans',system-ui,sans-serif}
+#dots{display:flex;gap:8px;align-items:center}
+#dots i{width:10px;height:10px;border-radius:50%;background:#fff3}
+#dots i.on{background:var(--rd);transform:scale(1.4)}
 .cf{position:fixed;top:-8%;z-index:20;pointer-events:none;animation:fall linear forwards}
 @keyframes fall{to{transform:translateY(115dvh) rotate(360deg)}}
-@media(max-width:768px){.tk{grid-template-columns:repeat(2,1fr)}.vs{grid-template-columns:1fr}.stairs{height:auto;max-height:none;flex-direction:column;align-items:stretch}.st{height:auto!important;border-radius:14px}.cds{flex-wrap:wrap}.cd{min-width:100%}.s{overflow:auto;justify-content:flex-start}}
-@media(max-height:650px) and (min-width:769px){.s{padding:1.5dvh 5vw}h1{font-size:clamp(24px,5vw,50px);margin-bottom:1dvh}.cd{padding:1.5dvh 2vw}.sub{margin-bottom:1dvh}}
+
+@media(max-width:768px){
+  .tk{grid-template-columns:repeat(2,1fr)}
+  .vs{grid-template-columns:1fr}
+  .stairs{height:auto;max-height:none;flex-direction:column;align-items:stretch}
+  .st{height:auto!important;border-radius:14px}
+  .cds{flex-wrap:wrap}.cd{min-width:100%}
+  .s{overflow:auto;justify-content:flex-start}
+  /* Ajustes para que los controles entren en móviles */
+  #nav{gap:8px}
+  #nav button{width:38px;height:38px;font-size:16px}
+  #nav #th{padding:0 12px;font-size:12px}
+  #dots{gap:6px}
+}
+@media(max-height:650px) and (min-width:769px){.s{padding:1.5dvh 5vw;overflow:auto;justify-content:flex-start}h1{font-size:clamp(24px,5vw,50px);margin-bottom:1dvh}.cd{padding:1.5dvh 2vw}.sub{margin-bottom:1dvh}.stairs{height:auto;max-height:none}}
 @keyframes sl{from{opacity:0;transform:scale(.85) translateY(30px);filter:blur(8px)}}
 .s.on h1{animation:ti .8s .1s both}@keyframes ti{from{opacity:0;letter-spacing:.35em;transform:translateY(-20px)}}
 .r{transform:translateY(40px) scale(.7) rotate(-3deg);transition:opacity .6s,transform .7s cubic-bezier(.2,1.7,.4,1)}
@@ -150,7 +167,6 @@ body.nb #brand{display:none}
 .gr h4{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:clamp(18px,2.6vw,30px);color:var(--gd);letter-spacing:.06em;text-align:left}
 .lst .gr .chip{font-size:clamp(13px,1.9vw,22px);padding:1.1dvh .8vw;margin:.7dvh 0;text-align:left}
 .lst .chip.es{font-size:clamp(20px,3.2vw,40px);padding:2dvh 1vw;margin-top:1dvh}
-#nav #th{width:auto;height:36px;border-radius:99px;padding:0 14px;font:800 13px 'Nunito Sans',system-ui,sans-serif}
 @media(max-width:700px){.mw{flex-direction:column}.mp{height:36dvh}}
 html[data-theme=light]{color-scheme:light;--bg:#fff8ec;--cd:#fff;--cr:#2a1a12;--gd:#c27c00;--gr:#1f9d57}
 html[data-theme=light] body{background:radial-gradient(circle at 85% 0,#ffdcb8,#fff8ec 55%)}
@@ -184,15 +200,9 @@ html[data-theme=light] .lg{box-shadow:0 8px 24px rgba(90,45,10,.3)}
 #tr{fill:none;stroke:var(--rd);stroke-width:4;stroke-linecap:round;opacity:0;transition:opacity .4s}
 #ar.t3 #rt{opacity:.55}#ar.t3 #tr{opacity:1}
 #ar.t2 .s1,#ar.t3 .s1,#ar.t3 .s2{opacity:0}
-@media(max-width:700px){.mp{height:38dvh}.tb{padding:0 12px}.lst{width:100%}}
 </style></head>
 <body>
 <div id="bg"></div><div id="wipe"></div><div id="brand"></div><div id="fg" hidden></div><div id="tk" hidden></div>
-
-<!-- Botón de Maximizar Icono Solo -->
-<button id="btn-fs" aria-label="Pantalla Completa" style="position:fixed; bottom:20px; left:20px; z-index:9999; background:var(--cd); color:var(--gd); border:2px solid var(--gd); border-radius:50%; width:48px; height:48px; display:flex; justify-content:center; align-items:center; cursor:pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.6);">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-</button>
 
 <div id="deck">
 <section class="s on"><div class="lgs" id="l0"></div><p class="k">INDUCCIÓN · ÁREA DE SELECCIÓN 2026</p><h1>Así podría ser<br><em>tu camino</em> con nosotros</h1><p class="sub">Sabores Express · Hamburguesas Extremas · Empanadas Manía</p></section>
@@ -209,7 +219,18 @@ html[data-theme=light] .lg{box-shadow:0 8px 24px rgba(90,45,10,.3)}
 <section class="s"><p class="k">REQUERIMIENTOS</p><h1>Lo que necesitás <em>para ingresar</em></h1><div id="rq"></div></section>
 <section class="s"><div class="lgs" id="l7"></div><h1>¡Gracias <em>por tu tiempo!</em></h1><p class="sub">Quedamos a disposición para tus consultas.</p></section>
 </div>
-<div id="nav"><button id="pv" aria-label="Anterior">◀</button><div id="dots"></div><button id="nx" aria-label="Siguiente">▶</button><button id="th"></button></div>
+
+<!-- Navegación integrada con el botón de maximizar -->
+<div id="nav">
+    <button id="btn-fs" aria-label="Pantalla Completa" title="Maximizar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+    </button>
+    <button id="pv" aria-label="Anterior">◀</button>
+    <div id="dots"></div>
+    <button id="nx" aria-label="Siguiente">▶</button>
+    <button id="th"></button>
+</div>
+
 <script>
 (function(){
 const T=[['🙋','Atención al cliente'],['💵','Cobro de pedidos'],['🍳','Cocina'],['🥟','Producción'],['🧽','Limpieza']];
@@ -304,7 +325,7 @@ function toggleFullScreen() {
         if (docElm.requestFullscreen) {
             docElm.requestFullscreen().catch(err => console.log("Error de fullscreen", err));
         } else if (docElm.webkitRequestFullscreen) {
-            docElm.webkitRequestFullscreen(); // Safari y TVs antiguas
+            docElm.webkitRequestFullscreen();
         }
     } else {
         if (document.exitFullscreen) {
@@ -315,7 +336,7 @@ function toggleFullScreen() {
     }
 }
 
-// Configuración del botón para bloquear propagación al padre (#deck)
+// Vinculación del evento
 const btnFs = $('btn-fs');
 if (btnFs) {
     btnFs.addEventListener('click', (e) => {
@@ -323,8 +344,6 @@ if (btnFs) {
         toggleFullScreen();
     });
 }
-
-// Atajos globales para fullscreen
 document.addEventListener('dblclick', toggleFullScreen);
 document.addEventListener('keydown', e => {
     if (e.key.toLowerCase() === 'f') {
