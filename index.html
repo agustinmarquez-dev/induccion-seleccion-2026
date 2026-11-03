@@ -16,7 +16,7 @@ body{background:radial-gradient(circle at 85% 0,#431511,var(--bg) 55%);color:var
 #bg span{position:absolute;bottom:-12%;opacity:.1;animation:up linear infinite}
 @keyframes up{to{transform:translateY(-120dvh) rotate(40deg)}}
 #deck{flex:1;position:relative;min-height:0}
-.s{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:3dvh 5vw;text-align:center}
+.s{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:3dvh 5vw;text-align:center;overflow:hidden}
 .s.on{display:flex;animation:sl .5s}
 @keyframes sl{from{opacity:0;transform:translateX(40px)}}
 .k{color:var(--gd);letter-spacing:.2em;font-weight:800;font-size:clamp(12px,1.7vw,19px)}
@@ -37,8 +37,8 @@ body.nb #brand{display:none}
 .g{display:grid;gap:1.8vw;width:min(1000px,100%)}
 .chip{background:var(--cd);border:2px solid var(--or);border-radius:16px;padding:2.4dvh 2vw;font-weight:800;font-size:clamp(16px,2.6vw,30px)}
 .chip.es{grid-column:1/-1;background:linear-gradient(90deg,var(--rd),var(--or));border:0;font-size:clamp(17px,3vw,34px)}
-.cds{display:flex;gap:2vw;width:min(1100px,100%);flex-wrap:wrap}
-.cd{flex:1;min-width:240px;background:var(--cd);border-top:7px solid var(--c);border-radius:18px;padding:3dvh 2vw}
+.cds{display:flex;gap:2vw;width:min(1100px,100%);flex-wrap:nowrap}
+.cd{flex:1;min-width:0;background:var(--cd);border-top:7px solid var(--c);border-radius:18px;padding:3dvh 2vw}
 .cd i{font-style:normal;font-size:clamp(36px,6vw,64px);display:block}
 .cd h3{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:clamp(28px,4.2vw,48px);color:var(--c);margin:.2em 0}
 .cd p{font-size:clamp(14px,2vw,22px);line-height:1.45}
@@ -74,7 +74,8 @@ body.nb #brand{display:none}
 #dots{display:flex;gap:8px}#dots i{width:10px;height:10px;border-radius:50%;background:#fff3}#dots i.on{background:var(--rd);transform:scale(1.4)}
 .cf{position:fixed;top:-8%;z-index:20;pointer-events:none;animation:fall linear forwards}
 @keyframes fall{to{transform:translateY(115dvh) rotate(360deg)}}
-@media(max-width:768px), (max-height: 650px){.tk{grid-template-columns:repeat(2,1fr)}.vs{grid-template-columns:1fr}.stairs{height:auto;max-height:none;flex-direction:column;align-items:stretch}.st{height:auto!important;border-radius:14px}.s{overflow:auto;justify-content:flex-start}}
+@media(max-width:768px){.tk{grid-template-columns:repeat(2,1fr)}.vs{grid-template-columns:1fr}.stairs{height:auto;max-height:none;flex-direction:column;align-items:stretch}.st{height:auto!important;border-radius:14px}.cds{flex-wrap:wrap}.cd{min-width:100%}.s{overflow:auto;justify-content:flex-start}}
+@media(max-height:650px) and (min-width:769px){.s{padding:1.5dvh 5vw}h1{font-size:clamp(24px,5vw,50px);margin-bottom:1dvh}.cd{padding:1.5dvh 2vw}.sub{margin-bottom:1dvh}}
 @keyframes sl{from{opacity:0;transform:scale(.85) translateY(30px);filter:blur(8px)}}
 .s.on h1{animation:ti .8s .1s both}@keyframes ti{from{opacity:0;letter-spacing:.35em;transform:translateY(-20px)}}
 .r{transform:translateY(40px) scale(.7) rotate(-3deg);transition:opacity .6s,transform .7s cubic-bezier(.2,1.7,.4,1)}
@@ -224,7 +225,7 @@ document.getElementById('rl').outerHTML=tasks('pt','Polivalente <em>part-time</e
 <script>
 const IMG = {
   S: 'https://raw.githubusercontent.com/agustinmarquez-dev/las-tortuguitas-ninja/main/assets/logos/sabores.png',
-  E: 'https://raw.githubusercontent.com/agustinmarquez-dev/las-tortuguitas-ninja/main/assets/logos/extremas.png',
+  E: 'https://raw.githubusercontent.com/agustinmarquez-dev/las-tortuguitas-ninja/main/assets/logos/extremas.jpg',
   M: 'https://raw.githubusercontent.com/agustinmarquez-dev/las-tortuguitas-ninja/main/assets/logos/mania.png'
 };
 const $=id=>document.getElementById(id),S=[...document.querySelectorAll('.s')],BG=['🍔','🥟','🍟','🥤','🍕','🍦'];
